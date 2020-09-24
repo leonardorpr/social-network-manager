@@ -66,6 +66,7 @@
     ],
     "import/no-cycle": "off",
     "no-shadow": "off",
+    "object-curly-newline": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off"
   },
   "settings": {
