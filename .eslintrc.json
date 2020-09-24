@@ -39,7 +39,15 @@
       "warn",
       {
         "newlinesBetween": "always",
-        "groups": ["/^react/", "module", ["parent", "sibling", "index"]],
+        "groups": [
+          "/^react/",
+          "module",
+          "/^configs/",
+          "/^assets/",
+          "/^core/",
+          "/^app/",
+          ["parent", "sibling", "index"]
+        ],
         "alphabetize": {
           "order": "asc",
           "ignoreCase": true
@@ -56,7 +64,9 @@
         "tsx": "never"
       }
     ],
-    "import/no-cycle": "off"
+    "import/no-cycle": "off",
+    "no-shadow": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off"
   },
   "settings": {
     "import/parsers": {
