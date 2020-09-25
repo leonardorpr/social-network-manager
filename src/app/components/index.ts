@@ -1,3 +1,4 @@
+import BasePage from './BasePage';
 import Header from './Header';
 
-export { Header as default };
+export { Header, BasePage };
