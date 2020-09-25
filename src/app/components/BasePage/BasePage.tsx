@@ -3,7 +3,7 @@ import React, { memo } from 'react';
 import { BasePageContainer } from './BasePage.styles';
 
 interface IBasePageProps {
-  children: React.ReactElement;
+  children: React.ReactNode;
   centralized?: boolean;
 }
 
