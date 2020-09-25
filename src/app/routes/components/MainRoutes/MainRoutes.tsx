@@ -2,6 +2,8 @@ import React, { useCallback } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 
 import history from 'configs/history';
+
+import Header from 'app/components/Header';
 import mainRoutesList from 'app/routes/routesList/mainRoutes';
 
 const MainRoutes: React.FC = () => {
@@ -20,6 +22,7 @@ const MainRoutes: React.FC = () => {
 
   return (
     <Router history={history}>
+      <Header />
       <Switch>{renderRoutes()}</Switch>
     </Router>
   );
