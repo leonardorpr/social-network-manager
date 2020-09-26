@@ -1,11 +1,11 @@
 const theme = {
   colors: {
-    orange: {
+    primary: {
       100: '#ffe5ca',
       200: '#f2994a',
-      300: '#ff962b',
+      300: '#E0812C',
     },
-    blue: {
+    secondary: {
       100: '#5a97e8',
       200: '#2f80ed',
       300: '#0d6ce8',
@@ -25,9 +25,14 @@ const theme = {
   },
   typography: {
     size: {
-      small: 12,
-      normal: 14,
-      large: 16,
+      small: '12px',
+      normal: '14px',
+      large: '16px',
+    },
+    lineHeight: {
+      small: '18px',
+      normal: '21px',
+      large: '24px',
     },
   },
 };

@@ -4,4 +4,5 @@ module.exports = {
   trailingComma: 'all',
   endOfLine: 'auto',
   jsxBracketSameLine: false,
+  printWidth: 120,
 };

@@ -1,4 +1,5 @@
 import BasePage from './BasePage';
+import Button from './Button';
 import Header from './Header';
 
-export { Header, BasePage };
+export { Header, BasePage, Button };
