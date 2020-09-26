@@ -11,6 +11,7 @@ export interface IButtonProps {
   fontSize?: 'small' | 'normal' | 'large';
   color?: 'primary' | 'secondary' | 'accent';
   variant?: 'solid' | 'outlined' | 'text';
+  onClick?(): void;
 }
 
 const Button: React.FC<IButtonProps> = ({ label, element = 'button', to, ...rest }) => {
