@@ -17,13 +17,7 @@ const Header: React.FC = () => {
 
   return (
     <HeaderContainer>
-      {isMobile && (
-        <FontAwesomeIcon
-          icon={faBars}
-          color={theme.colors.accent[900]}
-          size="lg"
-        />
-      )}
+      {isMobile && <FontAwesomeIcon icon={faBars} color={theme.colors.accent[900]} size="lg" />}
       {!isMobile && <HeaderLogo src={logo} alt="mLabs" />}
       <Avatar />
     </HeaderContainer>

@@ -9,12 +9,7 @@ import mainRoutesList from 'app/routes/routesList/mainRoutes';
 const MainRoutes: React.FC = () => {
   const renderRoutes = useCallback(() => {
     const mappedRoutes = mainRoutesList.map((route) => (
-      <Route
-        key={route.path}
-        path={route.path}
-        component={route.component}
-        exact={route.exact}
-      />
+      <Route key={route.path} path={route.path} component={route.component} exact={route.exact} />
     ));
 
     return mappedRoutes;
