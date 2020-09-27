@@ -11,7 +11,7 @@ export const AvatarPicture = styled.img`
   height: 45px;
 `;
 
-export const AvatarLabel = styled.span`
+export const AvatarLabel = styled.h2`
   font-size: 14px;
   line-height: 21px;
   color: ${({ theme }) => theme.colors.accent[1000]};

@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
-import { Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import history from 'configs/history';
+// import history from 'configs/history';
 
 import Header from 'app/components/Header';
 import mainRoutesList from 'app/routes/routesList/mainRoutes';
@@ -16,7 +16,7 @@ const MainRoutes: React.FC = () => {
   }, []);
 
   return (
-    <Router history={history}>
+    <Router>
       <Header />
       <Switch>{renderRoutes()}</Switch>
     </Router>
