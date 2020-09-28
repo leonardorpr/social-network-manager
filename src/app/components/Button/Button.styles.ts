@@ -6,7 +6,7 @@ import { IButtonProps } from './Button';
 
 const getSize = (size: 'small' | 'normal' | 'large') => {
   const sizes = {
-    small: '25px',
+    small: '27px',
     normal: '35px',
     large: '45px',
   };

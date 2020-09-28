@@ -7,8 +7,10 @@ interface IBasePageProps {
   centralized?: boolean;
 }
 
-const BasePage: React.FC<IBasePageProps> = ({ children, centralized }) => (
-  <BasePageContainer centralized={centralized}>{children}</BasePageContainer>
+const BasePage: React.FC<IBasePageProps> = ({ children, centralized, ...rest }) => (
+  <BasePageContainer centralized={centralized} {...rest}>
+    {children}
+  </BasePageContainer>
 );
 
 export default memo(BasePage);
