@@ -4,7 +4,7 @@ import { MediaQueries } from 'utils/mediaQueries';
 import { Button } from 'app/components';
 
 export const messageColors = {
-  default: '#bdbdbd',
+  default: '#828282',
   error: '#e57878',
   success: '#78e5d5',
 };
@@ -23,7 +23,7 @@ export const UploaderContainer = styled.div<{ isDragActive: boolean; isDragRejec
   justify-content: center;
   align-items: center;
   height: 80px;
-  border: 1px dashed ${messageColors.default};
+  border: 1px dashed #bdbdbd;
   border-radius: 4px;
   cursor: pointer;
   transition: height 0.2s ease;

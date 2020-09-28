@@ -4,8 +4,6 @@ import Dropzone from 'react-dropzone';
 import { faCloudUploadAlt, faCheckCircle, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import theme from 'configs/theme';
-
 import useIsMobile from 'core/hooks/useIsMobile';
 
 import { UploaderContainer, UploaderMessage, UploaderButton, messageColors } from './Uploader.styles';
@@ -33,7 +31,7 @@ const Uploader: React.FC<IUploaderProps> = ({ onUpload }) => {
 
   const renderIconMessageDesktop = useCallback((isDragActive, isDragReject) => {
     if (!isDragActive) {
-      return <FontAwesomeIcon icon={faCloudUploadAlt} size="2x" color={theme.colors.accent[700]} />;
+      return <FontAwesomeIcon icon={faCloudUploadAlt} size="2x" color={messageColors.default} />;
     }
 
     if (isDragReject) {
