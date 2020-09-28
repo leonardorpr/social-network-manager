@@ -6,5 +6,6 @@ import Field from './Field';
 import Footer from './Footer';
 import Header from './Header';
 import TextArea from './TextArea';
+import Uploader from './Uploader';
 
-export { Header, BasePage, Button, Footer, Card, DatePicker, Field, TextArea };
+export { Header, BasePage, Button, Footer, Card, DatePicker, Field, TextArea, Uploader };
