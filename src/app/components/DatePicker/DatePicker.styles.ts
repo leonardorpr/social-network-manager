@@ -1,6 +1,20 @@
 import styled from 'styled-components';
+import { MediaQueries } from 'utils/mediaQueries';
 
 export const DatePickerContainer = styled.div`
+  .react-datepicker-wrapper {
+    width: 100%;
+    z-index: 2;
+  }
+
+  .react-datepicker-popper {
+    transform: translate3d(20px, 260px, 0px) !important;
+
+    ${MediaQueries.BIGGER_THAN_SMALL} {
+      transform: translate3d(45px, 270px, 0px) !important;
+    }
+  }
+
   .react-datepicker {
     border-radius: 2px;
     border: none;

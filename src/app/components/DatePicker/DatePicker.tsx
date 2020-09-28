@@ -1,33 +1,38 @@
-import React, { memo, useCallback, useState } from 'react';
+import React, { memo, useCallback } from 'react';
 import ReactDatePicker from 'react-datepicker';
 
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faChevronRight, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import format from 'date-fns/format';
 import { ptBR } from 'date-fns/locale';
+
+import { Field } from 'app/components';
 
 import { DatePickerContainer, DatePickerHeader, DatePickerArrowButton, DatePickerMonth } from './DatePicker.styles';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-const DatePicker: React.FC = () => {
-  const [date, setDate] = useState(new Date());
+interface IDatePickerProps {
+  date: Date | null;
+  onSelectDate(date: Date): void;
+}
 
-  const handleSetDate = useCallback((date: Date) => setDate(date), []);
-
+const DatePicker: React.FC<IDatePickerProps> = ({ date, onSelectDate, ...rest }) => {
   const formatWeekDay = useCallback((date: string) => date.substring(0, 3), []);
 
   const formatMonthAndYear = useCallback((date: Date) => format(date, 'MMMM yyyy', { locale: ptBR }), []);
 
   return (
-    <DatePickerContainer>
+    <DatePickerContainer {...rest}>
       <ReactDatePicker
         dateFormat="dd/MM/yyyy"
         locale={ptBR}
         selected={date}
         formatWeekDay={(date) => formatWeekDay(date)}
-        onSelect={handleSetDate}
-        onChange={handleSetDate}
+        onSelect={onSelectDate}
+        onChange={onSelectDate}
+        placeholderText="DD/MM"
+        customInput={<Field icon={faCalendarAlt} placeholder="DD/MM" />}
         renderDayContents={(dayOfMonth) => <span className="react-datepicker__day-helper">{dayOfMonth}</span>}
         renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => (
           <DatePickerHeader>
