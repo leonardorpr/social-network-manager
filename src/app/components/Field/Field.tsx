@@ -6,7 +6,7 @@ import { FieldContainer, FieldIcon, FieldElement } from './Field.styles';
 
 interface IFieldProps {
   value?: any;
-  onChange?(event: any): void;
+  onChange?(event: React.ChangeEvent<HTMLInputElement>): void;
   type?: string;
   placeholder?: string;
   icon?: any;

@@ -16,7 +16,7 @@ export const CardTitle = styled.h3`
   font-size: ${({ theme }) => theme.typography.size.large};
   line-height: ${({ theme }) => theme.typography.size.large};
   color: ${({ theme }) => theme.colors.accent[900]};
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 
   &:after {
     content: '';
