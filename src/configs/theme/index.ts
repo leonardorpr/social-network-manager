@@ -9,6 +9,7 @@ const theme = {
       100: '#5a97e8',
       200: '#2f80ed',
       300: '#0d6ce8',
+      400: '#172b4d',
     },
     accent: {
       100: '#ffffff',
