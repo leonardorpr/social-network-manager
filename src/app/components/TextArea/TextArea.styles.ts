@@ -21,7 +21,7 @@ export const TextAreaEmojiPickerButton = styled.button`
 export const TextAreaElement = styled.textarea`
   width: 100%;
   min-height: 100px;
-  border: ${({ theme }) => `1px solid ${theme.colors.accent[800]}`};
+  border: ${({ theme }) => `1px solid ${theme.colors.accent[600]}`};
   border-radius: 4px;
   padding: 10px 25px 10px 10px;
   background-color: ${({ theme }) => theme.colors.accent[100]};

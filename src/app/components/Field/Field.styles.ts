@@ -14,7 +14,7 @@ export const FieldIcon = styled(FontAwesomeIcon)`
 
 export const FieldElement = styled.input<{ icon?: any }>`
   width: 100%;
-  border: ${({ theme }) => `1px solid ${theme.colors.accent[800]}`};
+  border: ${({ theme }) => `1px solid ${theme.colors.accent[600]}`};
   border-radius: 4px;
   padding: ${({ icon }) => (!icon ? '10px' : '10px 30px')};
   background-color: ${({ theme }) => theme.colors.accent[100]};
