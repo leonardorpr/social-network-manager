@@ -13,6 +13,7 @@ export const HeaderContainer = styled.header`
   padding-right: 20px;
   position: fixed;
   top: 0;
+  z-index: 5;
 
   ${MediaQueries.BIGGER_THAN_SMALL} {
     padding-left: 40px;

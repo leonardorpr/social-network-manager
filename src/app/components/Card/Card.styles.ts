@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const CardContainer = styled.div`
+export const CardContainer = styled.section`
   display: flex;
   flex-direction: column;
   background-color: ${({ theme }) => theme.colors.accent[100]};

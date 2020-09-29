@@ -31,8 +31,8 @@ const DatePicker: React.FC<IDatePickerProps> = ({ date, onSelectDate, ...rest })
         formatWeekDay={(date) => formatWeekDay(date)}
         onSelect={onSelectDate}
         onChange={onSelectDate}
-        placeholderText="DD/MM"
-        customInput={<Field icon={faCalendarAlt} placeholder="DD/MM" />}
+        placeholderText="DD/MM/AAAA"
+        customInput={<Field icon={faCalendarAlt} placeholder="DD/MM/AAAA" />}
         renderDayContents={(dayOfMonth) => <span className="react-datepicker__day-helper">{dayOfMonth}</span>}
         renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => (
           <DatePickerHeader>
