@@ -321,6 +321,13 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   }
+
+  #root {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: ${({ theme }) => theme.colors.accent[200]};
+  }
 `;
 
 export default GlobalStyles;

@@ -8,6 +8,7 @@ export const SchedulesContainer = styled(BasePage)`
   flex-direction: column;
   justify-content: center;
   padding: 20px;
+  margin-top: 100px;
 
   ${MediaQueries.BIGGER_THAN_SMALL} {
     padding: 40px;
