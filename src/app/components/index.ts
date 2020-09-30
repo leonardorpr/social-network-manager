@@ -1,6 +1,7 @@
 import BasePage from './BasePage';
 import Button from './Button';
 import Card from './Card';
+import DataTable from './DataTable';
 import DatePicker from './DatePicker';
 import Field from './Field';
 import Footer from './Footer';
@@ -24,4 +25,5 @@ export {
   SocialNetworksList,
   PostPreview,
   Modal,
+  DataTable,
 };
