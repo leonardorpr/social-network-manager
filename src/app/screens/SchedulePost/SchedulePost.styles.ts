@@ -20,6 +20,13 @@ export const SchedulePostPage = styled(BasePage)`
   }
 `;
 
+export const SchedulePostForm = styled.form`
+  ${MediaQueries.BIGGER_THAN_SMALL} {
+    display: flex;
+    flex-direction: row;
+  }
+`;
+
 export const SchedulePostGrid = styled.div`
   flex-grow: 1;
 `;
