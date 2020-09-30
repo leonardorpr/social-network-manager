@@ -16,6 +16,7 @@ export const SchedulePostSuccessModalContainer = styled.dialog`
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
   z-index: 10;
+  outline-width: 0px;
 `;
 
 export const SchedulePostSuccessModalContent = styled.section`

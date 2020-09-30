@@ -3,14 +3,13 @@ import React, { memo } from 'react';
 import PostPreviewInstagram from './components/PostPreviewInstagram';
 import PostPreviewLinkedin from './components/PostPreviewLinkedin';
 // import PostPreviewNoContent from './components/PostPreviewNoContent';
+import { PostPreviewContainer } from './PostPreview.styles';
 
 const PostPreview: React.FC = () => (
-  <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-    <div style={{ marginRight: 20 }}>
-      <PostPreviewInstagram />
-    </div>
+  <PostPreviewContainer>
+    <PostPreviewInstagram />
     <PostPreviewLinkedin />
-  </div>
+  </PostPreviewContainer>
 );
 
 export default memo(PostPreview);

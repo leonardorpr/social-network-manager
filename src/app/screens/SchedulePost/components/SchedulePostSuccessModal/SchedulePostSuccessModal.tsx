@@ -11,7 +11,7 @@ import {
 } from './SchedulePostSuccessModal.styles';
 
 const SchedulePostSuccessModal: React.FC = () => (
-  <SchedulePostSuccessModalContainer>
+  <SchedulePostSuccessModalContainer open>
     <SchedulePostSuccessModalContent>
       <SchedulePostSuccessModalImage src={emojiLike} alt="emoji de curtir" />
       <SchedulePostSuccessModalText>Agendado com sucesso!</SchedulePostSuccessModalText>
