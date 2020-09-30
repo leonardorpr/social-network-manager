@@ -44,6 +44,7 @@ export const DatePickerContainer = styled.div`
     height: 32px;
     font-family: 'Poppins', sans-serif;
     font-size: ${({ theme }) => theme.typography.size.small};
+    font-weight: 500;
     line-height: ${({ theme }) => theme.typography.lineHeight.small};
     text-transform: uppercase;
     color: ${({ theme }) => theme.colors.secondary[400]};
@@ -51,6 +52,7 @@ export const DatePickerContainer = styled.div`
     &-name {
       font-family: 'Poppins', sans-serif;
       font-size: ${({ theme }) => theme.typography.size.small};
+      font-weight: 500;
       line-height: ${({ theme }) => theme.typography.lineHeight.small};
       text-transform: uppercase;
       color: ${({ theme }) => theme.colors.secondary[400]};
@@ -115,6 +117,7 @@ export const DatePickerArrowButton = styled.button`
 export const DatePickerMonth = styled.h5`
   display: block;
   font-size: ${({ theme }) => theme.typography.size.normal};
+  font-weight: 500;
   line-height: ${({ theme }) => theme.typography.lineHeight.normal};
   color: ${({ theme }) => theme.colors.secondary[400]};
 `;

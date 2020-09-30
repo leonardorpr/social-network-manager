@@ -19,6 +19,7 @@ export const FieldElement = styled.input<{ icon?: any }>`
   padding: ${({ icon }) => (!icon ? '10px' : '10px 30px')};
   background-color: ${({ theme }) => theme.colors.accent[100]};
   font-size: ${({ theme }) => theme.typography.size.normal};
+  font-weight: 500;
   line-height: ${({ theme }) => theme.typography.lineHeight.normal};
   color: ${({ theme }) => theme.colors.accent[800]};
 

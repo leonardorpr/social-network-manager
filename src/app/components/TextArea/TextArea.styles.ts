@@ -26,6 +26,7 @@ export const TextAreaElement = styled.textarea`
   padding: 10px 25px 10px 10px;
   background-color: ${({ theme }) => theme.colors.accent[100]};
   font-size: ${({ theme }) => theme.typography.size.normal};
+  font-weight: 500;
   line-height: ${({ theme }) => theme.typography.lineHeight.normal};
   color: ${({ theme }) => theme.colors.accent[800]};
 

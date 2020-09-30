@@ -36,6 +36,7 @@ export const PostPreviewLinkedinInformations = styled.div`
 export const PostPreviewLinkedinAvatarName = styled.h5`
   font-size: ${({ theme }) => theme.typography.size.normal};
   line-height: ${({ theme }) => theme.typography.lineHeight.normal};
+  font-weight: 500;
   color: ${({ theme }) => theme.colors.accent[1000]};
 `;
 
@@ -60,12 +61,14 @@ export const PostPreviewLinkedinActionsContainer = styled.div`
 export const PostPreviewLinkedinDescription = styled.p`
   font-size: ${({ theme }) => theme.typography.size.normal};
   line-height: ${({ theme }) => theme.typography.lineHeight.normal};
+  font-weight: 500;
   color: ${({ theme }) => theme.colors.accent[800]};
   padding: 0px 13px;
 `;
 
 export const PostPreviewLinkedinComments = styled.p`
   font-size: ${({ theme }) => theme.typography.size.small};
+  font-weight: 500;
   line-height: ${({ theme }) => theme.typography.lineHeight.small};
   color: ${({ theme }) => theme.colors.accent[700]};
   font-weight: 400;

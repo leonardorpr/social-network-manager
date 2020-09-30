@@ -16,8 +16,8 @@ export const SchedulesContainer = styled(BasePage)`
 
 export const SchedulesTitle = styled.h1`
   font-size: ${({ theme }) => theme.typography.size.large};
-  line-height: ${({ theme }) => theme.typography.lineHeight.large};
   font-weight: 500;
+  line-height: ${({ theme }) => theme.typography.lineHeight.large};
   color: ${({ theme }) => theme.colors.accent[800]};
   margin-bottom: 30px;
 `;

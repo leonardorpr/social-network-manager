@@ -38,6 +38,7 @@ export const UploaderContainer = styled.div<{ isDragActive: boolean; isDragRejec
 
 export const UploaderMessage = styled.p<{ type: 'default' | 'error' | 'success' }>`
   font-size: ${({ theme }) => theme.typography.size.large};
+  font-weight: 500;
   line-height: ${({ theme }) => theme.typography.lineHeight.large};
   color: ${({ type }) => messageColors[type || 'default']};
   margin-top: 10px;

@@ -19,6 +19,7 @@ const BaseButton = css<IButtonProps>`
   align-items: center;
   justify-content: center;
   font-size: ${({ theme, fontSize }) => theme.typography.size[fontSize || 'normal']};
+  font-weight: 500;
   line-height: ${({ theme, fontSize }) => theme.typography.lineHeight[fontSize || 'normal']};
   text-decoration: none;
   height: ${({ size }) => getSize(size || 'normal')};

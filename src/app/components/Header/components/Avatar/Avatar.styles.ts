@@ -14,6 +14,7 @@ export const AvatarPicture = styled.img`
 export const AvatarLabel = styled.h2`
   font-size: 14px;
   line-height: 21px;
+  font-weight: 500;
   color: ${({ theme }) => theme.colors.accent[1000]};
   margin-left: 8px;
 `;

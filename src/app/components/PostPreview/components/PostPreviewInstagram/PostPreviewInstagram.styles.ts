@@ -30,6 +30,7 @@ export const PostPreviewInstagramAvatarImage = styled.img`
 
 export const PostPreviewInstagramAvatarName = styled.h5`
   font-size: ${({ theme }) => theme.typography.size.normal};
+  font-weight: 500;
   line-height: ${({ theme }) => theme.typography.lineHeight.normal};
   color: ${({ theme }) => theme.colors.accent[1000]};
 `;
@@ -57,6 +58,7 @@ export const PostPreviewInstagramActionsContainer = styled.div`
 export const PostPreviewInstagramDescription = styled.p`
   font-size: ${({ theme }) => theme.typography.size.normal};
   line-height: ${({ theme }) => theme.typography.lineHeight.normal};
+  font-weight: 500;
   color: ${({ theme }) => theme.colors.accent[800]};
   padding: 0px 13px;
 `;

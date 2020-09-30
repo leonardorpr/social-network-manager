@@ -10,6 +10,7 @@ export const PostPreviewNoContentContainer = styled.div`
 export const PostPreviewNoContentDescription = styled.h4`
   font-size: ${({ theme }) => theme.typography.size.large};
   line-height: ${({ theme }) => theme.typography.lineHeight.large};
+  font-weight: 500;
   color: ${({ theme }) => theme.colors.accent[700]};
   text-align: center;
   width: 380px;

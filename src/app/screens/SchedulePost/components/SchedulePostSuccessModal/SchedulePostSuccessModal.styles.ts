@@ -43,6 +43,7 @@ export const SchedulePostSuccessModalImage = styled.img`
 
 export const SchedulePostSuccessModalText = styled.h3`
   font-size: ${({ theme }) => theme.typography.size.big};
+  font-weight: 500;
   line-height: ${({ theme }) => theme.typography.lineHeight.big};
   margin-bottom: 20px;
 `;

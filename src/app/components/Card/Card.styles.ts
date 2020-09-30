@@ -14,6 +14,7 @@ export const CardTitle = styled.h3`
   flex-direction: column;
   position: relative;
   font-size: ${({ theme }) => theme.typography.size.large};
+  font-weight: 500;
   line-height: ${({ theme }) => theme.typography.size.large};
   color: ${({ theme }) => theme.colors.accent[900]};
   margin-bottom: 20px;

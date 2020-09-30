@@ -26,6 +26,7 @@ export const ModalHeader = styled.header`
 export const ModalTitle = styled.h2`
   font-size: ${({ theme }) => theme.typography.size.large};
   line-height: ${({ theme }) => theme.typography.lineHeight.large};
+  font-weight: 500;
   color: ${({ theme }) => theme.colors.accent[900]};
   margin-left: 10px;
 `;
