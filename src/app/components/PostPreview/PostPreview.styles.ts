@@ -12,6 +12,7 @@ export const PostPreviewContainer = styled.div`
   ${MediaQueries.BIGGER_THAN_SMALL} {
     flex-direction: row;
     align-items: center;
+    height: 100%;
 
     article:first-child {
       margin-bottom: 0px;
