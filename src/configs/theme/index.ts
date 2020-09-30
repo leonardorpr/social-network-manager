@@ -29,11 +29,13 @@ const theme = {
       small: '12px',
       normal: '14px',
       large: '16px',
+      big: '24px',
     },
     lineHeight: {
       small: '18px',
       normal: '21px',
       large: '24px',
+      big: '36px',
     },
   },
 };

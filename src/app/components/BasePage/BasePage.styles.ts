@@ -8,6 +8,6 @@ export const BasePageContainer = styled.main<{ centralized?: boolean }>`
   width: 100%;
   height: 100vh;
   background-color: ${({ theme }) => theme.colors.accent[200]};
-  margin-top: 80px;
+  padding-top: 80px;
   overflow-y: auto;
 `;
