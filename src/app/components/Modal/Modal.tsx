@@ -9,6 +9,7 @@ import { ModalContainer, ModalContent, ModalHeader, ModalTitle, ModalCloseButton
 
 export interface IModalHandles {
   openModal(): void;
+  closeModal(): void;
 }
 
 interface IModalProps {
@@ -30,7 +31,10 @@ const Modal: React.ForwardRefRenderFunction<IModalHandles, IModalProps> = (
     [setVisible],
   );
 
-  useImperativeHandle(ref, () => ({ openModal: () => handleVisibleModal(true) }));
+  useImperativeHandle(ref, () => ({
+    openModal: () => handleVisibleModal(true),
+    closeModal: () => handleVisibleModal(false),
+  }));
 
   if (!visible) {
     return null;

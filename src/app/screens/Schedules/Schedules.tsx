@@ -6,10 +6,14 @@ import { useDispatch } from 'react-redux';
 import { format, isAfter } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
+import useIsMobile from 'core/hooks/useIsMobile';
 import useSelector from 'core/hooks/useSelector';
+import { ISchedule } from 'core/interfaces/ISchedule';
 import { fetchSchedulesRequest, fetchPostStatusRequest } from 'core/store/slices/schedules';
 
 import { DataTable, ModalFullScreen, PostPreview, Modal } from 'app/components';
+import { IModalHandles } from 'app/components/Modal/Modal';
+import { IModalFullScreenHandles } from 'app/components/ModalFullScreen/ModalFullScreen';
 
 import SchedulesFilterButton from './components/SchedulesFilterButton';
 import SchedulesSocialNetworks from './components/SchedulesSocialNetworks';
@@ -24,10 +28,6 @@ import {
   SchedulePreviewButton,
   SchedulesContainerPostPreview,
 } from './Schedules.styles';
-import useIsMobile from 'core/hooks/useIsMobile';
-import { IModalFullScreenHandles } from 'app/components/ModalFullScreen/ModalFullScreen';
-import { IModalHandles } from 'app/components/Modal/Modal';
-import { ISchedule } from 'core/interfaces/ISchedule';
 
 const Schedules: React.FC = () => {
   const dispatch = useDispatch();

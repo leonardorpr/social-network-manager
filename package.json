@@ -62,6 +62,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "react-styled-flexboxgrid": "^3.2.1",
+    "react-toastify": "^6.0.8",
     "redux": "^4.0.5",
     "redux-persist": "^6.0.0",
     "redux-saga": "^1.1.3",

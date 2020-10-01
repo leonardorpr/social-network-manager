@@ -1,3 +1,4 @@
+import attention from './attention.png';
 import avatar from './avatar.png';
 import emojiLike from './emoji-like.png';
 import logoInstagram from './logo-instagram.png';
@@ -9,6 +10,7 @@ import schedulesInstagram from './schedules-instagram.png';
 import schedulesLinkedin from './schedules-linkedin.png';
 
 export {
+  attention,
   avatar,
   logo,
   logoInstagram,

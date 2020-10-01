@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect, useRef, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { formatISO } from 'date-fns';
@@ -12,12 +13,12 @@ import { ISchedulePost } from 'core/interfaces/ISchedulePost';
 import { socialNetworksRequest, setDraft } from 'core/store/slices/schedulePost';
 import { setRecentSchedules } from 'core/store/slices/schedules';
 
-import { TextArea, Uploader, SocialNetworksList, PostPreview, ModalFullScreen } from 'app/components';
+import { TextArea, Uploader, SocialNetworksList, PostPreview, ModalFullScreen, Modal } from 'app/components';
+import { IModalHandles } from 'app/components/Modal/Modal';
 import { IModalFullScreenHandles } from 'app/components/ModalFullScreen/ModalFullScreen';
 
-import SchedulePostSuccessModal, {
-  ISchedulePostSuccessModalHandles,
-} from './components/SchedulePostSuccessModal/SchedulePostSuccessModal';
+import SchedulePostAttentionModal from './components/SchedulePostAttentionModal';
+import SchedulePostSuccessModal from './components/SchedulePostSuccessModal';
 import {
   SchedulePostPage,
   SchedulePostForm,
@@ -37,7 +38,8 @@ const SchedulePost: React.FC = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const modalRef = useRef<IModalFullScreenHandles>(null);
-  const modalSuccessRef = useRef<ISchedulePostSuccessModalHandles>(null);
+  const modalSuccessRef = useRef<IModalHandles>(null);
+  const modalAttentionRef = useRef<IModalHandles>(null);
 
   const allSocialNetworks = useSelector((state) => state.schedulePost.socialNetworks);
   const draft = useSelector((state) => state.schedulePost.draft);
@@ -96,6 +98,16 @@ const SchedulePost: React.FC = () => {
 
   const handleSaveDraft = useCallback(() => {
     dispatch(setDraft(schedule));
+
+    toast.info('Rascunho salvo com sucesso 🥳 ', {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   }, [dispatch, schedule]);
 
   const handleCreateSchedule = useCallback(() => {
@@ -120,7 +132,20 @@ const SchedulePost: React.FC = () => {
     modalSuccessRef.current?.openModal();
   }, [dispatch, modalSuccessRef, schedule]);
 
-  const handleCancelSchedule = useCallback(() => history.push('/'), [history]);
+  const handleCancelSchedule = useCallback(() => {
+    const { publicationDate, publicationTime, media, text } = schedule;
+
+    if (publicationDate || publicationTime || media || text) {
+      modalAttentionRef.current?.openModal();
+      return;
+    }
+
+    history.push('/');
+  }, [history, schedule]);
+
+  const handleCloseAttentionModal = useCallback(() => {
+    modalAttentionRef.current?.closeModal();
+  }, [history]);
 
   useEffect(() => {
     fetchSocialNetworks();
@@ -136,7 +161,7 @@ const SchedulePost: React.FC = () => {
     if (allSocialNetworks.length) {
       const mappedAllSocialNetworks = allSocialNetworks.map((socialNetwork) => ({
         ...socialNetwork,
-        selected: false,
+        selected: !!socialNetwork.selected,
       }));
 
       setScheduleField('socialNetworks', mappedAllSocialNetworks);
@@ -220,7 +245,13 @@ const SchedulePost: React.FC = () => {
           </ModalFullScreen>
         )}
 
-        <SchedulePostSuccessModal ref={modalSuccessRef} />
+        <Modal ref={modalSuccessRef}>
+          <SchedulePostSuccessModal />
+        </Modal>
+
+        <Modal ref={modalAttentionRef}>
+          <SchedulePostAttentionModal onCancelClick={handleCloseAttentionModal} />
+        </Modal>
       </SchedulePostPage>
 
       <SchedulePostFooter>
