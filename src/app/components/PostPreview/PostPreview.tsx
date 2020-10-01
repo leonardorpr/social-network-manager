@@ -1,7 +1,6 @@
 import React, { memo, useMemo, useCallback } from 'react';
 
 import { SocialNetwork } from 'core/enums/SocialNetwork';
-import { ISchedulePostSocialNetwork } from 'core/interfaces/ISchedulePost';
 
 import PostPreviewInstagram from './components/PostPreviewInstagram';
 import PostPreviewLinkedin from './components/PostPreviewLinkedin';
@@ -9,7 +8,7 @@ import PostPreviewNoContent from './components/PostPreviewNoContent';
 import { PostPreviewContainer } from './PostPreview.styles';
 
 interface IPostPreviewProps {
-  socialNetworks: ISchedulePostSocialNetwork[];
+  socialNetworks: { id: number; selected: boolean }[];
   image?: string;
   description: string;
 }

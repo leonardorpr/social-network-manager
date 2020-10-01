@@ -52,3 +52,7 @@ export const SchedulePreviewButton = styled.button`
   color: #1661f3;
   margin: 0 auto;
 `;
+
+export const SchedulesContainerPostPreview = styled.div`
+  padding: 36px 24px 100px 24px;
+`;

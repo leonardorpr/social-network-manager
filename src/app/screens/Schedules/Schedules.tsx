@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import React, { useState, useMemo, useCallback, useEffect } from 'react';
+import React, { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { format, isAfter } from 'date-fns';
@@ -9,7 +9,7 @@ import { ptBR } from 'date-fns/locale';
 import useSelector from 'core/hooks/useSelector';
 import { fetchSchedulesRequest, fetchPostStatusRequest } from 'core/store/slices/schedules';
 
-import { DataTable } from 'app/components';
+import { DataTable, Modal, PostPreview } from 'app/components';
 
 import SchedulesFilterButton from './components/SchedulesFilterButton';
 import SchedulesSocialNetworks from './components/SchedulesSocialNetworks';
@@ -22,17 +22,42 @@ import {
   SchedulesPostImage,
   ScheduleDate,
   SchedulePreviewButton,
+  SchedulesContainerPostPreview,
 } from './Schedules.styles';
+import useIsMobile from 'core/hooks/useIsMobile';
+import { IModalHandles } from 'app/components/Modal/Modal';
+import { ISchedule } from 'core/interfaces/ISchedule';
 
 const Schedules: React.FC = () => {
   const dispatch = useDispatch();
+  const isMobile = useIsMobile();
+  const modalRef = useRef<IModalHandles>(null);
 
+  const [schedulePreview, setSchedulePreview] = useState<ISchedule>({
+    id: 0,
+    statusKey: 0,
+    publicationDate: '',
+    text: '',
+    media: '',
+    socialNetworkKey: [],
+  });
   const [statusFilter, setFilterStatus] = useState('');
   const [order, setOrder] = useState<'ascending' | 'descending'>('ascending');
 
   const schedules = useSelector((state) => state.schedules.schedules);
   const recentSchedules = useSelector((state) => state.schedules.recentSchedules);
   const status = useSelector((state) => state.schedules.status);
+
+  const socialNetworksParser = useMemo(
+    () => ({
+      ...schedulePreview,
+      socialNetworkKey: schedulePreview.socialNetworkKey.map((socialNetwork) => ({
+        id: socialNetwork,
+        selected: true,
+      })),
+    }),
+    [schedulePreview],
+  );
 
   const allSchedules = useMemo(() => {
     const currentSchedules = [...recentSchedules, ...schedules];
@@ -64,6 +89,17 @@ const Schedules: React.FC = () => {
 
     return [blankOption, ...mappedStatus];
   }, [status]);
+
+  const handleSetSchedulePreview = useCallback(
+    (schedule: ISchedule) => {
+      setSchedulePreview(schedule);
+
+      if (isMobile) {
+        modalRef.current?.openModal();
+      }
+    },
+    [setSchedulePreview, isMobile],
+  );
 
   const handleSetOrder = useCallback(() => {
     setOrder((currentOrder) => (currentOrder === 'ascending' ? 'descending' : 'ascending'));
@@ -138,7 +174,11 @@ const Schedules: React.FC = () => {
             key: 'actions',
             name: 'Ações',
             centralized: true,
-            DataComponent: () => <SchedulePreviewButton type="button">Preview</SchedulePreviewButton>,
+            DataComponent: (row: any) => (
+              <SchedulePreviewButton type="button" onClick={() => handleSetSchedulePreview(row)}>
+                Preview
+              </SchedulePreviewButton>
+            ),
           },
           {
             key: 'statusKey',
@@ -149,6 +189,18 @@ const Schedules: React.FC = () => {
         ]}
         rows={filteredSchedules}
       />
+
+      {isMobile && (
+        <Modal ref={modalRef} title="Visualização do post">
+          <SchedulesContainerPostPreview>
+            <PostPreview
+              socialNetworks={socialNetworksParser.socialNetworkKey}
+              description={socialNetworksParser.text}
+              image={socialNetworksParser.media}
+            />
+          </SchedulesContainerPostPreview>
+        </Modal>
+      )}
     </SchedulesContainer>
   );
 };
