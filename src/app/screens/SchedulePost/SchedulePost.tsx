@@ -12,8 +12,8 @@ import { ISchedulePost } from 'core/interfaces/ISchedulePost';
 import { socialNetworksRequest, setDraft } from 'core/store/slices/schedulePost';
 import { setRecentSchedules } from 'core/store/slices/schedules';
 
-import { TextArea, Uploader, SocialNetworksList, PostPreview, Modal } from 'app/components';
-import { IModalHandles } from 'app/components/Modal/Modal';
+import { TextArea, Uploader, SocialNetworksList, PostPreview, ModalFullScreen } from 'app/components';
+import { IModalFullScreenHandles } from 'app/components/ModalFullScreen/ModalFullScreen';
 
 import SchedulePostSuccessModal, {
   ISchedulePostSuccessModalHandles,
@@ -36,7 +36,7 @@ const SchedulePost: React.FC = () => {
   const isMobile = useIsMobile();
   const dispatch = useDispatch();
   const history = useHistory();
-  const modalRef = useRef<IModalHandles>(null);
+  const modalRef = useRef<IModalFullScreenHandles>(null);
   const modalSuccessRef = useRef<ISchedulePostSuccessModalHandles>(null);
 
   const allSocialNetworks = useSelector((state) => state.schedulePost.socialNetworks);
@@ -209,7 +209,7 @@ const SchedulePost: React.FC = () => {
         </SchedulePostForm>
 
         {isMobile && (
-          <Modal ref={modalRef} title="Visualização do post">
+          <ModalFullScreen ref={modalRef} title="Visualização do post">
             <SchedulePostContainerPostPreview>
               <PostPreview
                 socialNetworks={schedule.socialNetworks}
@@ -217,7 +217,7 @@ const SchedulePost: React.FC = () => {
                 image={schedule.media}
               />
             </SchedulePostContainerPostPreview>
-          </Modal>
+          </ModalFullScreen>
         )}
 
         <SchedulePostSuccessModal ref={modalSuccessRef} />

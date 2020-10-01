@@ -9,7 +9,7 @@ import { ptBR } from 'date-fns/locale';
 import useSelector from 'core/hooks/useSelector';
 import { fetchSchedulesRequest, fetchPostStatusRequest } from 'core/store/slices/schedules';
 
-import { DataTable, Modal, PostPreview } from 'app/components';
+import { DataTable, ModalFullScreen, PostPreview } from 'app/components';
 
 import SchedulesFilterButton from './components/SchedulesFilterButton';
 import SchedulesSocialNetworks from './components/SchedulesSocialNetworks';
@@ -25,13 +25,13 @@ import {
   SchedulesContainerPostPreview,
 } from './Schedules.styles';
 import useIsMobile from 'core/hooks/useIsMobile';
-import { IModalHandles } from 'app/components/Modal/Modal';
+import { IModalFullScreenHandles } from 'app/components/ModalFullScreen/ModalFullScreen';
 import { ISchedule } from 'core/interfaces/ISchedule';
 
 const Schedules: React.FC = () => {
   const dispatch = useDispatch();
   const isMobile = useIsMobile();
-  const modalRef = useRef<IModalHandles>(null);
+  const modalRef = useRef<IModalFullScreenHandles>(null);
 
   const [schedulePreview, setSchedulePreview] = useState<ISchedule>({
     id: 0,
@@ -191,7 +191,7 @@ const Schedules: React.FC = () => {
       />
 
       {isMobile && (
-        <Modal ref={modalRef} title="Visualização do post">
+        <ModalFullScreen ref={modalRef} title="Visualização do post">
           <SchedulesContainerPostPreview>
             <PostPreview
               socialNetworks={socialNetworksParser.socialNetworkKey}
@@ -199,7 +199,7 @@ const Schedules: React.FC = () => {
               image={socialNetworksParser.media}
             />
           </SchedulesContainerPostPreview>
-        </Modal>
+        </ModalFullScreen>
       )}
     </SchedulesContainer>
   );

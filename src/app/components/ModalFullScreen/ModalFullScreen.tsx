@@ -5,18 +5,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import theme from 'configs/theme';
 
-import { ModalContainer, ModalHeader, ModalTitle, ModalCloseButton } from './Modal.styles';
+import { ModalContainer, ModalHeader, ModalTitle, ModalCloseButton } from './ModalFullScreen.styles';
 
-export interface IModalHandles {
+export interface IModalFullScreenHandles {
   openModal(): void;
 }
 
-interface IModalProps {
+interface IModalFullScreenProps {
   children: React.ReactNode;
   title: string;
 }
 
-const Modal: React.ForwardRefRenderFunction<IModalHandles, IModalProps> = ({ children, title }, ref) => {
+const ModalFullScreen: React.ForwardRefRenderFunction<IModalFullScreenHandles, IModalFullScreenProps> = (
+  { children, title },
+  ref,
+) => {
   const [visible, setVisible] = useState(false);
 
   const handleVisibleModal = useCallback(
@@ -45,4 +48,4 @@ const Modal: React.ForwardRefRenderFunction<IModalHandles, IModalProps> = ({ chi
   );
 };
 
-export default forwardRef(Modal);
+export default forwardRef(ModalFullScreen);
