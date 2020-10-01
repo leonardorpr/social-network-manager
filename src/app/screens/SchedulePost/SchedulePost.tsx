@@ -145,7 +145,7 @@ const SchedulePost: React.FC = () => {
 
   const handleCloseAttentionModal = useCallback(() => {
     modalAttentionRef.current?.closeModal();
-  }, [history]);
+  }, []);
 
   useEffect(() => {
     fetchSocialNetworks();
