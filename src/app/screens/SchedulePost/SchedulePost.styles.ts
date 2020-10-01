@@ -75,8 +75,7 @@ export const SchedulePostTime = styled(Field)`
 `;
 
 export const SchedulePostContainerPostPreview = styled.div`
-  padding: 36px 24px;
-  overflow: auto;
+  padding: 36px 24px 100px 24px;
 `;
 
 export const SchedulePostPublicationDateContainer = styled.div`

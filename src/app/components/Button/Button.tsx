@@ -6,6 +6,7 @@ export interface IButtonProps {
   label?: string;
   to?: string;
   disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
   element?: 'button' | 'link';
   size?: 'small' | 'normal' | 'large';
   fontSize?: 'small' | 'normal' | 'large';
@@ -14,9 +15,13 @@ export interface IButtonProps {
   onClick?(): void;
 }
 
-const Button: React.FC<IButtonProps> = ({ label, element = 'button', to, ...rest }) => {
+const Button: React.FC<IButtonProps> = ({ label, element = 'button', type = 'button', to, ...rest }) => {
   if (element === 'button') {
-    return <ContainerButton {...rest}>{label}</ContainerButton>;
+    return (
+      <ContainerButton type={type} {...rest}>
+        {label}
+      </ContainerButton>
+    );
   }
 
   return (

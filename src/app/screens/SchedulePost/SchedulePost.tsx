@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { faClock } from '@fortawesome/free-solid-svg-icons';
@@ -8,7 +8,8 @@ import useSelector from 'core/hooks/useSelector';
 import { ISchedulePost } from 'core/interfaces/ISchedulePost';
 import { socialNetworksRequest } from 'core/store/slices/schedulePost';
 
-import { TextArea, Uploader, SocialNetworksList, PostPreview /* Modal */ } from 'app/components';
+import { TextArea, Uploader, SocialNetworksList, PostPreview, Modal } from 'app/components';
+import { IModalHandles } from 'app/components/Modal/Modal';
 
 // import SchedulePostSuccessModal from './components/SchedulePostSuccessModal';
 import {
@@ -22,18 +23,14 @@ import {
   SchedulePostViewPostButton,
   SchedulePostDatePicker,
   SchedulePostTime,
-  // SchedulePostContainerPostPreview,
+  SchedulePostContainerPostPreview,
 } from './SchedulePost.styles';
 /* <SchedulePostSuccessModal /> */
 
-/* <Modal title="Visualização do post">
-          <SchedulePostContainerPostPreview>
-            <PostPreview />
-          </SchedulePostContainerPostPreview>
-        </Modal> */
 const SchedulePost: React.FC = () => {
   const isMobile = useIsMobile();
   const dispatch = useDispatch();
+  const modalRef = useRef<IModalHandles>(null);
 
   const allSocialNetworks = useSelector((state) => state.schedulePost.socialNetworks);
   const draft = useSelector((state) => state.schedulePost.draft);
@@ -78,6 +75,8 @@ const SchedulePost: React.FC = () => {
   const fetchSocialNetworks = useCallback(() => {
     dispatch(socialNetworksRequest());
   }, [dispatch]);
+
+  const openModal = useCallback(() => modalRef.current?.openModal(), [modalRef]);
 
   useEffect(() => {
     fetchSocialNetworks();
@@ -147,6 +146,7 @@ const SchedulePost: React.FC = () => {
                 variant="solid"
                 color="primary"
                 size="normal"
+                onClick={() => openModal()}
               />
             )}
           </SchedulePostGrid>
@@ -163,6 +163,18 @@ const SchedulePost: React.FC = () => {
             </SchedulePostGrid>
           )}
         </SchedulePostForm>
+
+        {isMobile && (
+          <Modal ref={modalRef} title="Visualização do post">
+            <SchedulePostContainerPostPreview>
+              <PostPreview
+                socialNetworks={schedule.socialNetworks}
+                description={schedule.text}
+                image={schedule.media}
+              />
+            </SchedulePostContainerPostPreview>
+          </Modal>
+        )}
       </SchedulePostPage>
 
       <SchedulePostFooter>

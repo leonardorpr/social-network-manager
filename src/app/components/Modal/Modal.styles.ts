@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export const ModalContainer = styled.dialog`
-  display: flex;
+export const ModalContainer = styled.dialog<{ visible: boolean }>`
+  display: ${({ visible }) => (visible ? 'flex' : 'none')};
   flex-direction: column;
   position: fixed;
   top: 80px;
@@ -12,6 +12,7 @@ export const ModalContainer = styled.dialog`
   border: ${({ theme }) => `1px solid ${theme.colors.accent[300]}`};
   z-index: 10;
   outline-width: 0px;
+  overflow: auto;
 `;
 
 export const ModalHeader = styled.header`
