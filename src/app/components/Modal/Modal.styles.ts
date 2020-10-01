@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export const ModalContainer = styled.dialog<{ visible: boolean }>`
-  display: ${({ visible }) => (visible ? 'flex' : 'none')};
+export const ModalContainer = styled.dialog`
+  display: flex;
   flex-direction: column;
   position: fixed;
   top: 80px;

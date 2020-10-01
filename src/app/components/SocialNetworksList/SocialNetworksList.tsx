@@ -38,7 +38,7 @@ interface ISocialNetworksListProps {
 const SocialNetworksList: React.FC<ISocialNetworksListProps> = ({ socialNetworks, onSocialNetworkClick }) => {
   const renderSocialNetworks = useCallback(() => {
     const mappedSocialNetworks = socialNetworks.map((socialNetwork) => (
-      <SocialNetworksListItem>
+      <SocialNetworksListItem key={socialNetwork.id}>
         <SocialNetworksListButton
           selected={socialNetwork.selected}
           type="button"
@@ -56,7 +56,7 @@ const SocialNetworksList: React.FC<ISocialNetworksListProps> = ({ socialNetworks
     ));
 
     return mappedSocialNetworks;
-  }, [socialNetworks]);
+  }, [socialNetworks, onSocialNetworkClick]);
 
   return <SocialNetworksListContainer>{renderSocialNetworks()}</SocialNetworksListContainer>;
 };

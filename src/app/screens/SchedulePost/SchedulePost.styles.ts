@@ -24,6 +24,7 @@ export const SchedulePostForm = styled.form`
   ${MediaQueries.BIGGER_THAN_SMALL} {
     display: flex;
     flex-direction: row;
+    width: 100%;
   }
 `;
 

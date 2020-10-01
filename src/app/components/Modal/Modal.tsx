@@ -28,8 +28,12 @@ const Modal: React.ForwardRefRenderFunction<IModalHandles, IModalProps> = ({ chi
 
   useImperativeHandle(ref, () => ({ openModal: () => handleVisibleModal(true) }));
 
+  if (!visible) {
+    return null;
+  }
+
   return (
-    <ModalContainer open={visible} visible={visible}>
+    <ModalContainer open={visible}>
       <ModalHeader>
         <ModalTitle>{title}</ModalTitle>
         <ModalCloseButton onClick={() => handleVisibleModal(false)}>

@@ -26,10 +26,10 @@ const PostPreview: React.FC<IPostPreviewProps> = ({ socialNetworks, image, descr
   const renderSocialNetworks = useCallback(() => {
     const mappedSocialNetworks = selectedSocialNetworks.map((socialNetwork) => {
       if (socialNetwork.id === SocialNetwork.Instagram) {
-        return <PostPreviewInstagram description={description} image={image} />;
+        return <PostPreviewInstagram key={socialNetwork.id} description={description} image={image} />;
       }
 
-      return <PostPreviewLinkedin description={description} image={image} />;
+      return <PostPreviewLinkedin key={socialNetwork.id} description={description} image={image} />;
     });
 
     return mappedSocialNetworks;

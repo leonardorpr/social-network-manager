@@ -5,6 +5,7 @@ export const PostPreviewNoContentContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
 `;
 
 export const PostPreviewNoContentDescription = styled.h4`

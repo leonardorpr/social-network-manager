@@ -1,10 +1,10 @@
 export interface ISchedule {
   id: number;
   socialNetworkKey: number[];
-  media: string;
+  media?: string;
   text: string;
   publicationDate: Date | string;
-  statusKey: string;
+  statusKey: number;
 }
 
 export interface IScheduleStatus {

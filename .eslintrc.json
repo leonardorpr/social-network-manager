@@ -27,6 +27,7 @@
     "react/jsx-one-expression-per-line": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "no-use-before-define": [0],
+    "no-unused-expressions": "off",
     "@typescript-eslint/no-use-before-define": [1],
     "import-helpers/order-imports": [
       "warn",

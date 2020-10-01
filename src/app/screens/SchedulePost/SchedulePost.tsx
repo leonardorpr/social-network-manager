@@ -1,17 +1,23 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useCallback, useEffect, useRef, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import { faClock } from '@fortawesome/free-solid-svg-icons';
+import { formatISO } from 'date-fns';
+import { parseFullTimeDate } from 'utils/dates';
 
 import useIsMobile from 'core/hooks/useIsMobile';
 import useSelector from 'core/hooks/useSelector';
 import { ISchedulePost } from 'core/interfaces/ISchedulePost';
-import { socialNetworksRequest } from 'core/store/slices/schedulePost';
+import { socialNetworksRequest, setDraft } from 'core/store/slices/schedulePost';
+import { setRecentSchedules } from 'core/store/slices/schedules';
 
 import { TextArea, Uploader, SocialNetworksList, PostPreview, Modal } from 'app/components';
 import { IModalHandles } from 'app/components/Modal/Modal';
 
-// import SchedulePostSuccessModal from './components/SchedulePostSuccessModal';
+import SchedulePostSuccessModal, {
+  ISchedulePostSuccessModalHandles,
+} from './components/SchedulePostSuccessModal/SchedulePostSuccessModal';
 import {
   SchedulePostPage,
   SchedulePostForm,
@@ -25,12 +31,13 @@ import {
   SchedulePostTime,
   SchedulePostContainerPostPreview,
 } from './SchedulePost.styles';
-/* <SchedulePostSuccessModal /> */
 
 const SchedulePost: React.FC = () => {
   const isMobile = useIsMobile();
   const dispatch = useDispatch();
+  const history = useHistory();
   const modalRef = useRef<IModalHandles>(null);
+  const modalSuccessRef = useRef<ISchedulePostSuccessModalHandles>(null);
 
   const allSocialNetworks = useSelector((state) => state.schedulePost.socialNetworks);
   const draft = useSelector((state) => state.schedulePost.draft);
@@ -42,6 +49,15 @@ const SchedulePost: React.FC = () => {
     text: '',
     media: '',
   });
+
+  const socialNetworksSelected = useMemo(
+    () => schedule.socialNetworks.find((socialNetwork) => socialNetwork.selected),
+    [schedule],
+  );
+  const scheduleButtonIsDisable = useMemo(
+    () => !schedule.publicationTime || !schedule.publicationDate || !socialNetworksSelected,
+    [schedule, socialNetworksSelected],
+  );
 
   const setScheduleField = useCallback(
     (field: string, value: any) => {
@@ -62,7 +78,7 @@ const SchedulePost: React.FC = () => {
 
       setScheduleField('socialNetworks', mappedSocialNetworksSchedule);
     },
-    [setSchedule, schedule],
+    [setScheduleField, schedule],
   );
 
   const setScheduleAllFields = useCallback(
@@ -77,6 +93,34 @@ const SchedulePost: React.FC = () => {
   }, [dispatch]);
 
   const openModal = useCallback(() => modalRef.current?.openModal(), [modalRef]);
+
+  const handleSaveDraft = useCallback(() => {
+    dispatch(setDraft(schedule));
+  }, [dispatch, schedule]);
+
+  const handleCreateSchedule = useCallback(() => {
+    const socialNetworkKey = schedule.socialNetworks
+      .filter((socialNetwork) => socialNetwork.selected)
+      .map((socialNetwork) => socialNetwork.id);
+
+    const date = formatISO(schedule.publicationDate || new Date(), { representation: 'date' });
+    const time = formatISO(parseFullTimeDate(schedule.publicationTime), { representation: 'time' });
+    const publicationDate = `${date}T${time}`;
+
+    const recentSchedule = {
+      id: Math.floor(Math.random() * 10) + 1,
+      socialNetworkKey,
+      media: schedule.media,
+      text: schedule.text,
+      publicationDate,
+      statusKey: 1,
+    };
+
+    dispatch(setRecentSchedules(recentSchedule));
+    modalSuccessRef.current?.openModal();
+  }, [dispatch, modalSuccessRef, schedule]);
+
+  const handleCancelSchedule = useCallback(() => history.push('/'), [history]);
 
   useEffect(() => {
     fetchSocialNetworks();
@@ -175,6 +219,8 @@ const SchedulePost: React.FC = () => {
             </SchedulePostContainerPostPreview>
           </Modal>
         )}
+
+        <SchedulePostSuccessModal ref={modalSuccessRef} />
       </SchedulePostPage>
 
       <SchedulePostFooter>
@@ -184,6 +230,7 @@ const SchedulePost: React.FC = () => {
           variant="text"
           size={isMobile ? 'small' : 'large'}
           color="secondary"
+          onClick={handleCancelSchedule}
         />
         <SchedulePostButton
           label={isMobile ? 'Rascunho' : 'Salvar rascunho'}
@@ -191,6 +238,7 @@ const SchedulePost: React.FC = () => {
           variant="outlined"
           size={isMobile ? 'small' : 'large'}
           color="secondary"
+          onClick={handleSaveDraft}
         />
         <SchedulePostButton
           label="Agendar"
@@ -198,6 +246,8 @@ const SchedulePost: React.FC = () => {
           variant="solid"
           size={isMobile ? 'small' : 'large'}
           color="secondary"
+          disabled={scheduleButtonIsDisable}
+          onClick={handleCreateSchedule}
         />
       </SchedulePostFooter>
     </>
