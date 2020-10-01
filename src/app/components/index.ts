@@ -8,6 +8,7 @@ import Footer from './Footer';
 import Header from './Header';
 import Modal from './Modal';
 import PostPreview from './PostPreview';
+import SelectField from './SelectField';
 import SocialNetworksList from './SocialNetworksList';
 import TextArea from './TextArea';
 import Uploader from './Uploader';
@@ -26,4 +27,5 @@ export {
   PostPreview,
   Modal,
   DataTable,
+  SelectField,
 };

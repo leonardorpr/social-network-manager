@@ -5,6 +5,7 @@ export const DataTableContainer = styled.div`
 `;
 
 export const DataTableElement = styled.table`
+  width: 100%;
   border-collapse: collapse;
   border: 1px solid #bdbdbd;
   text-align: center;
