@@ -12,7 +12,7 @@ const getSchedulesRequest: CaseReducer<IScheduleStoreState> = (state) => ({ ...s
 
 const getSchedulesSuccess: CaseReducer<IScheduleStoreState, PayloadAction<ISchedule[]>> = (state, action) => ({
   ...state,
-  schedules: action.payload,
+  schedules: [...state.schedules, ...action.payload],
 });
 
 const getSchedulesFailure: CaseReducer<IScheduleStoreState> = (state) => ({ ...state });
