@@ -1,7 +1,9 @@
+/* eslint-disable */
+
 import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import format from 'date-fns/format';
+import { format, isAfter } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
 import useSelector from 'core/hooks/useSelector';
@@ -22,53 +24,30 @@ import {
   SchedulePreviewButton,
 } from './Schedules.styles';
 
-const config = [
-  {
-    key: 'socialNetworkKey',
-    name: 'Redes sociais',
-    centralized: true,
-    DataComponent: (row: any) => <SchedulesSocialNetworks socialNetworks={row.socialNetworkKey} />,
-  },
-  {
-    key: 'media',
-    name: 'Mídia',
-    centralized: true,
-    DataComponent: (row: any) => <SchedulesPostImage src={row.media} alt="Imagem da postagem" />,
-  },
-  { key: 'text', name: 'Texto', centralized: false },
-  {
-    key: 'publicationDate',
-    name: 'Data',
-    centralized: false,
-    HeaderComponent: () => <SchedulesFilterButton description="Data" isAscendingOrder onClick={() => null} />,
-    DataComponent: (row: any) => (
-      <ScheduleDate>{format(new Date(row.publicationDate), "dd/MM/yyyy 'às' HH:mm", { locale: ptBR })}h</ScheduleDate>
-    ),
-  },
-  {
-    key: 'actions',
-    name: 'Ações',
-    centralized: true,
-    DataComponent: () => <SchedulePreviewButton type="button">Preview</SchedulePreviewButton>,
-  },
-  {
-    key: 'statusKey',
-    name: 'Status',
-    centralized: false,
-    DataComponent: (row: any) => <SchedulesStatus status={row.statusKey} />,
-  },
-];
-
 const Schedules: React.FC = () => {
   const dispatch = useDispatch();
 
   const [statusFilter, setFilterStatus] = useState('');
+  const [order, setOrder] = useState<'ascending' | 'descending'>('ascending');
 
   const schedules = useSelector((state) => state.schedules.schedules);
   const recentSchedules = useSelector((state) => state.schedules.recentSchedules);
   const status = useSelector((state) => state.schedules.status);
 
-  const allSchedules = useMemo(() => [...recentSchedules, ...schedules], [recentSchedules, schedules]);
+  const allSchedules = useMemo(() => {
+    const currentSchedules = [...recentSchedules, ...schedules];
+
+    if (order === 'ascending') {
+      return currentSchedules.sort((prevSchedule, nextSchedule) =>
+        isAfter(new Date(prevSchedule.publicationDate), new Date(nextSchedule.publicationDate)) ? -1 : 1,
+      );
+    }
+
+    return currentSchedules.sort((prevSchedule, nextSchedule) =>
+      !isAfter(new Date(prevSchedule.publicationDate), new Date(nextSchedule.publicationDate)) ? -1 : 1,
+    );
+  }, [recentSchedules, schedules, order]);
+
   const filteredSchedules = useMemo(() => {
     if (!statusFilter) {
       return allSchedules;
@@ -85,6 +64,17 @@ const Schedules: React.FC = () => {
 
     return [blankOption, ...mappedStatus];
   }, [status]);
+
+  const handleSetOrder = useCallback(() => {
+    setOrder((currentOrder) => (currentOrder === 'ascending' ? 'descending' : 'ascending'));
+  }, [setOrder]);
+
+  const handleSetStatusFilter = useCallback(
+    (value: string) => {
+      setFilterStatus(value);
+    },
+    [statusFilter],
+  );
 
   const fetchSchedules = useCallback(() => {
     dispatch(fetchSchedulesRequest());
@@ -108,11 +98,57 @@ const Schedules: React.FC = () => {
         <SchedulesTitle>Listagem de agendamento</SchedulesTitle>
         <SchedulesSelectStatus
           value={statusFilter}
-          onSelectChange={(event) => setFilterStatus(event.currentTarget.value)}
+          onSelectChange={(event) => handleSetStatusFilter(event.currentTarget.value)}
           options={statusOptions}
         />
       </SchedulesTitleContainer>
-      <DataTable config={config} rows={filteredSchedules} />
+      <DataTable
+        config={[
+          {
+            key: 'socialNetworkKey',
+            name: 'Redes sociais',
+            centralized: true,
+            DataComponent: (row: any) => <SchedulesSocialNetworks socialNetworks={row.socialNetworkKey} />,
+          },
+          {
+            key: 'media',
+            name: 'Mídia',
+            centralized: true,
+            DataComponent: (row: any) => <SchedulesPostImage src={row.media} alt="Imagem da postagem" />,
+          },
+          { key: 'text', name: 'Texto', centralized: false },
+          {
+            key: 'publicationDate',
+            name: 'Data',
+            centralized: false,
+            HeaderComponent: () => (
+              <SchedulesFilterButton
+                description="Data"
+                isAscendingOrder={order === 'ascending'}
+                onClick={handleSetOrder}
+              />
+            ),
+            DataComponent: (row: any) => (
+              <ScheduleDate>
+                {format(new Date(row.publicationDate), "dd/MM/yyyy 'às' HH:mm", { locale: ptBR })}h
+              </ScheduleDate>
+            ),
+          },
+          {
+            key: 'actions',
+            name: 'Ações',
+            centralized: true,
+            DataComponent: () => <SchedulePreviewButton type="button">Preview</SchedulePreviewButton>,
+          },
+          {
+            key: 'statusKey',
+            name: 'Status',
+            centralized: false,
+            DataComponent: (row: any) => <SchedulesStatus status={row.statusKey} />,
+          },
+        ]}
+        rows={filteredSchedules}
+      />
     </SchedulesContainer>
   );
 };
