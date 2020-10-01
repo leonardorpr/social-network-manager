@@ -1,3 +1,7 @@
+import { ISchedulePostStoreState } from 'core/store/interfaces/ISchedulePostStore';
+import { IScheduleStoreState } from 'core/store/interfaces/IScheduleStore';
+
 export interface IStore {
-  remove: string;
+  schedules: IScheduleStoreState;
+  schedulePost: ISchedulePostStoreState;
 }

@@ -31,7 +31,7 @@ const saveDraft: CaseReducer<ISchedulePostStoreState, PayloadAction<ISchedulePos
   draft: action.payload,
 });
 
-const clearPreviousDraft: CaseReducer<ISchedulePostStoreState> = (state) => ({
+const clearPreviouDraft: CaseReducer<ISchedulePostStoreState> = (state) => ({
   ...state,
   draft: initialState.draft,
 });
@@ -44,7 +44,7 @@ const schedulePost = createSlice({
     socialNetworksSuccess: getSocialNetworksSuccess,
     socialNetworksFailure: getSocialNetworksFailure,
     setDraft: saveDraft,
-    clearDraft: clearPreviousDraft,
+    clearDraft: clearPreviouDraft,
   },
 });
 
