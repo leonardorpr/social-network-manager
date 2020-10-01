@@ -4,7 +4,7 @@ export interface ISchedule {
   media?: string;
   text: string;
   publicationDate: Date | string;
-  statusKey: number;
+  statusKey: number | string;
 }
 
 export interface IScheduleStatus {

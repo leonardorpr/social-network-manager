@@ -34,7 +34,7 @@ const DataTable: React.FC<IDataTableProps> = ({ config, rows }) => {
   const renderConfig = useCallback(
     (row: any) => {
       const mappedConfig = config.map(({ key, centralized, DataComponent }) => (
-        <DataTableColumnData centralized={centralized}>
+        <DataTableColumnData key={key} centralized={centralized}>
           {DataComponent ? DataComponent(row) : row[key]}
         </DataTableColumnData>
       ));
