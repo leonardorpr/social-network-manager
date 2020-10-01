@@ -13,7 +13,7 @@ const PostPreviewNoContent: React.FC = () => (
     <PostPreviewNoContentDescription>
       Aguardando conteúdo. Informe os canais e as mídias desejadas para visualização.
     </PostPreviewNoContentDescription>
-    <PostPreviewNoContentImage src={postPreview} />
+    <PostPreviewNoContentImage src={postPreview} alt="preview do post" />
   </PostPreviewNoContentContainer>
 );
 

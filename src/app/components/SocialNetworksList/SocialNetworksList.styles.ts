@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import styled from 'styled-components';
 
 export const SocialNetworksListContainer = styled.ul`
@@ -12,29 +14,35 @@ export const SocialNetworksListItem = styled.li`
   }
 `;
 
-export const SocialNetworksListButton = styled.button`
+export const SocialNetworksListButton = styled.button<{ selected: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
   height: 33px;
   width: 33px;
   border-radius: 16px;
-  border: ${({ theme }) => `1px solid ${theme.colors.accent[500]}`};
-  background-color: ${({ theme }) => theme.colors.accent[100]};
+  border: ${({ theme, selected }) => `1px solid ${selected ? '#ef9f2e' : theme.colors.accent[500]}`};
+  background: ${({ theme, selected }) =>
+    selected ? 'linear-gradient(135deg, #ef9f2e 25%, #e02b4b 105.56%)' : theme.colors.accent[100]};
   transition: all 0.2s ease 0s;
 
+  svg {
+    transition: color 0.2s ease 0s;
+    color: ${({ theme, selected }) => (selected ? theme.colors.accent[100] : theme.colors.accent[900])};
+  }
+
   &:hover {
-    background-color: #fff3e0;
+    background: ${({ selected }) => (selected ? 'linear-gradient(135deg, #ef9f2e 25%, #e02b4b 105.56%)' : '#fff3e0')};
     border-color: #ef9f2e;
 
     svg {
       transition: color 0.2s ease 0s;
-      color: #ef9f2e;
+      color: ${({ theme, selected }) => (selected ? theme.colors.accent[100] : '#ef9f2e')};
     }
   }
 
   &:disabled {
-    background-color: ${({ theme }) => theme.colors.accent[400]};
+    background: ${({ theme }) => theme.colors.accent[400]};
     border-color: ${({ theme }) => theme.colors.accent[500]};
 
     svg {

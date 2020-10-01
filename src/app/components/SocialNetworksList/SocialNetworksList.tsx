@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback } from 'react';
 
 import {
   faInstagram,
@@ -12,50 +12,53 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import theme from 'configs/theme';
 
+import { SocialNetwork } from 'core/enums/SocialNetwork';
+import { ISchedulePostSocialNetwork } from 'core/interfaces/ISchedulePost';
+
 import {
   SocialNetworksListContainer,
   SocialNetworksListItem,
   SocialNetworksListButton,
 } from './SocialNetworksList.styles';
 
-const SocialNetworksList: React.FC = () => (
-  <SocialNetworksListContainer>
-    <SocialNetworksListItem>
-      <SocialNetworksListButton type="button">
-        <FontAwesomeIcon icon={faInstagram} height="16px" width="16px" color={theme.colors.accent[900]} />
-      </SocialNetworksListButton>
-    </SocialNetworksListItem>
+const socialNetworkIcons: { [key: number]: any } = {
+  [SocialNetwork.Facebook]: faFacebookF,
+  [SocialNetwork.Linkedin]: faLinkedinIn,
+  [SocialNetwork.Instagram]: faInstagram,
+  [SocialNetwork.Youtube]: faYoutube,
+  [SocialNetwork.Pinterest]: faPinterest,
+  [SocialNetwork.Twitter]: faTwitter,
+};
 
-    <SocialNetworksListItem>
-      <SocialNetworksListButton type="button">
-        <FontAwesomeIcon icon={faLinkedinIn} height="16px" width="16px" color={theme.colors.accent[900]} />
-      </SocialNetworksListButton>
-    </SocialNetworksListItem>
+interface ISocialNetworksListProps {
+  socialNetworks: ISchedulePostSocialNetwork[];
+  onSocialNetworkClick(id: number, value: boolean): void;
+}
 
-    <SocialNetworksListItem>
-      <SocialNetworksListButton type="button" disabled>
-        <FontAwesomeIcon icon={faYoutube} height="16px" width="16px" color={theme.colors.accent[900]} />
-      </SocialNetworksListButton>
-    </SocialNetworksListItem>
+const SocialNetworksList: React.FC<ISocialNetworksListProps> = ({ socialNetworks, onSocialNetworkClick }) => {
+  const renderSocialNetworks = useCallback(() => {
+    const mappedSocialNetworks = socialNetworks.map((socialNetwork) => (
+      <SocialNetworksListItem>
+        <SocialNetworksListButton
+          selected={socialNetwork.selected}
+          type="button"
+          disabled={socialNetwork.status === 'disabled'}
+          onClick={() => onSocialNetworkClick(socialNetwork.id, !socialNetwork.selected)}
+        >
+          <FontAwesomeIcon
+            icon={socialNetworkIcons[socialNetwork.id]}
+            height="16px"
+            width="16px"
+            color={theme.colors.accent[900]}
+          />
+        </SocialNetworksListButton>
+      </SocialNetworksListItem>
+    ));
 
-    <SocialNetworksListItem>
-      <SocialNetworksListButton type="button" disabled>
-        <FontAwesomeIcon icon={faPinterest} height="16px" width="16px" color={theme.colors.accent[900]} />
-      </SocialNetworksListButton>
-    </SocialNetworksListItem>
+    return mappedSocialNetworks;
+  }, [socialNetworks]);
 
-    <SocialNetworksListItem>
-      <SocialNetworksListButton type="button" disabled>
-        <FontAwesomeIcon icon={faTwitter} height="16px" width="16px" color={theme.colors.accent[900]} />
-      </SocialNetworksListButton>
-    </SocialNetworksListItem>
-
-    <SocialNetworksListItem>
-      <SocialNetworksListButton type="button" disabled>
-        <FontAwesomeIcon icon={faFacebookF} size="1x" color={theme.colors.accent[900]} />
-      </SocialNetworksListButton>
-    </SocialNetworksListItem>
-  </SocialNetworksListContainer>
-);
+  return <SocialNetworksListContainer>{renderSocialNetworks()}</SocialNetworksListContainer>;
+};
 
 export default memo(SocialNetworksList);

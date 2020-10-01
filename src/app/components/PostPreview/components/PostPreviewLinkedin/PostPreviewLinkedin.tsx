@@ -21,7 +21,12 @@ import {
   PostPreviewLinkedinPublicationDate,
 } from './PostPreviewLinkedin.styles';
 
-const PostPreviewLinkedin: React.FC = () => (
+interface IPostPreviewLinkedinProps {
+  description: string;
+  image?: string;
+}
+
+const PostPreviewLinkedin: React.FC<IPostPreviewLinkedinProps> = ({ description, image }) => (
   <PostPreviewLinkedinContainer>
     <PostPreviewLinkedinAvatarContainer>
       <picture>
@@ -32,8 +37,8 @@ const PostPreviewLinkedin: React.FC = () => (
         <PostPreviewLinkedinPublicationDate>06 de setembro</PostPreviewLinkedinPublicationDate>
       </PostPreviewLinkedinInformations>
     </PostPreviewLinkedinAvatarContainer>
-    <PostPreviewLinkedinDescription>Aqui vai o texto descritivo desse post</PostPreviewLinkedinDescription>
-    <PostPreviewLinkedinPhoto src="" alt="imagem da postagem" />
+    <PostPreviewLinkedinDescription>{description}</PostPreviewLinkedinDescription>
+    <PostPreviewLinkedinPhoto src={image} alt="imagem da postagem" />
     <PostPreviewLinkedinComments>5 comentários</PostPreviewLinkedinComments>
     <PostPreviewLinkedinActionsContainer>
       <span aria-label="preview do botão de curtir">

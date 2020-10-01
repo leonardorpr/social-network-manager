@@ -17,7 +17,12 @@ import {
   PostPreviewInstagramDescription,
 } from './PostPreviewInstagram.styles';
 
-const PostPreviewInstagram: React.FC = () => (
+interface IPostPreviewInstagramProps {
+  description: string;
+  image?: string;
+}
+
+const PostPreviewInstagram: React.FC<IPostPreviewInstagramProps> = ({ description, image }) => (
   <PostPreviewInstagramContainer>
     <PostPreviewInstagramAvatarContainer>
       <picture>
@@ -25,7 +30,7 @@ const PostPreviewInstagram: React.FC = () => (
       </picture>
       <PostPreviewInstagramAvatarName>Anselmo Carlos</PostPreviewInstagramAvatarName>
     </PostPreviewInstagramAvatarContainer>
-    <PostPreviewInstagramPhoto src="" alt="imagem da postagem" />
+    <PostPreviewInstagramPhoto src={image} alt="imagem da postagem" />
     <PostPreviewInstagramActionsContainer>
       <div>
         <span aria-label="preview do botão de curtir">
@@ -39,7 +44,7 @@ const PostPreviewInstagram: React.FC = () => (
         <FontAwesomeIcon icon={faBookmark} size="lg" color={theme.colors.accent[800]} />
       </span>
     </PostPreviewInstagramActionsContainer>
-    <PostPreviewInstagramDescription>Aqui vai o texto descritivo desse post</PostPreviewInstagramDescription>
+    <PostPreviewInstagramDescription>{description}</PostPreviewInstagramDescription>
   </PostPreviewInstagramContainer>
 );
 

@@ -7,7 +7,7 @@ const initialState: ISchedulePostStoreState = {
   socialNetworks: [],
   draft: {
     publicationDate: null,
-    publicationTime: null,
+    publicationTime: '',
     text: '',
     media: '',
     socialNetworks: [],

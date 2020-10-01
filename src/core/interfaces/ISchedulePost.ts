@@ -3,7 +3,7 @@ export interface ISchedulePost {
   media?: string;
   text: string;
   publicationDate: Date | null;
-  publicationTime: Date | null;
+  publicationTime: Date | string;
 }
 
 export interface ISchedulePostSocialNetwork {
