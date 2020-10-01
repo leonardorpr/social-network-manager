@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 
 import useIsMobile from 'core/hooks/useIsMobile';
+import { socialNetworksRequest } from 'core/store/slices/schedulePost';
 
 import { TextArea, Uploader, SocialNetworksList, PostPreview /* Modal */ } from 'app/components';
 
@@ -29,6 +31,15 @@ import {
         </Modal> */
 const SchedulePost: React.FC = () => {
   const isMobile = useIsMobile();
+  const dispatch = useDispatch();
+
+  const fetchSocialNetworks = useCallback(() => {
+    dispatch(socialNetworksRequest());
+  }, [dispatch]);
+
+  useEffect(() => {
+    fetchSocialNetworks();
+  }, [fetchSocialNetworks]);
 
   return (
     <>
