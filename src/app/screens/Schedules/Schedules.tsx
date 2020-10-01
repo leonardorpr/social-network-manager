@@ -9,7 +9,7 @@ import { ptBR } from 'date-fns/locale';
 import useSelector from 'core/hooks/useSelector';
 import { fetchSchedulesRequest, fetchPostStatusRequest } from 'core/store/slices/schedules';
 
-import { DataTable, ModalFullScreen, PostPreview } from 'app/components';
+import { DataTable, ModalFullScreen, PostPreview, Modal } from 'app/components';
 
 import SchedulesFilterButton from './components/SchedulesFilterButton';
 import SchedulesSocialNetworks from './components/SchedulesSocialNetworks';
@@ -26,12 +26,14 @@ import {
 } from './Schedules.styles';
 import useIsMobile from 'core/hooks/useIsMobile';
 import { IModalFullScreenHandles } from 'app/components/ModalFullScreen/ModalFullScreen';
+import { IModalHandles } from 'app/components/Modal/Modal';
 import { ISchedule } from 'core/interfaces/ISchedule';
 
 const Schedules: React.FC = () => {
   const dispatch = useDispatch();
   const isMobile = useIsMobile();
-  const modalRef = useRef<IModalFullScreenHandles>(null);
+  const modalRef = useRef<IModalHandles>(null);
+  const modalFullScreenRef = useRef<IModalFullScreenHandles>(null);
 
   const [schedulePreview, setSchedulePreview] = useState<ISchedule>({
     id: 0,
@@ -95,8 +97,11 @@ const Schedules: React.FC = () => {
       setSchedulePreview(schedule);
 
       if (isMobile) {
-        modalRef.current?.openModal();
+        modalFullScreenRef.current?.openModal();
+        return;
       }
+
+      modalRef.current?.openModal();
     },
     [setSchedulePreview, isMobile],
   );
@@ -131,7 +136,7 @@ const Schedules: React.FC = () => {
   return (
     <SchedulesContainer>
       <SchedulesTitleContainer>
-        <SchedulesTitle>Listagem de agendamento</SchedulesTitle>
+        <SchedulesTitle>Listagem de agendamentos</SchedulesTitle>
         <SchedulesSelectStatus
           value={statusFilter}
           onSelectChange={(event) => handleSetStatusFilter(event.currentTarget.value)}
@@ -190,8 +195,18 @@ const Schedules: React.FC = () => {
         rows={filteredSchedules}
       />
 
+      {!isMobile && (
+        <Modal ref={modalRef} title="Visualização do post" isLarge>
+          <PostPreview
+            socialNetworks={socialNetworksParser.socialNetworkKey}
+            description={socialNetworksParser.text}
+            image={socialNetworksParser.media}
+          />
+        </Modal>
+      )}
+
       {isMobile && (
-        <ModalFullScreen ref={modalRef} title="Visualização do post">
+        <ModalFullScreen ref={modalFullScreenRef} title="Visualização do post">
           <SchedulesContainerPostPreview>
             <PostPreview
               socialNetworks={socialNetworksParser.socialNetworkKey}
