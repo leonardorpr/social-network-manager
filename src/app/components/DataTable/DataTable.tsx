@@ -13,6 +13,7 @@ interface IDataTableProps {
   config: {
     key: string;
     name: string;
+    centralized: boolean;
     HeaderComponent?(): React.ReactNode;
     DataComponent?(row: any): React.ReactNode;
   }[];
@@ -21,8 +22,10 @@ interface IDataTableProps {
 
 const DataTable: React.FC<IDataTableProps> = ({ config, rows }) => {
   const renderHeader = useCallback(() => {
-    const mappedHeader = config.map(({ key, name, HeaderComponent }) => (
-      <DataTableColumnHeader key={key}>{HeaderComponent ? HeaderComponent() : name}</DataTableColumnHeader>
+    const mappedHeader = config.map(({ key, name, centralized, HeaderComponent }) => (
+      <DataTableColumnHeader centralized={centralized} key={key}>
+        {HeaderComponent ? HeaderComponent() : name}
+      </DataTableColumnHeader>
     ));
 
     return mappedHeader;
@@ -30,8 +33,10 @@ const DataTable: React.FC<IDataTableProps> = ({ config, rows }) => {
 
   const renderConfig = useCallback(
     (row: any) => {
-      const mappedConfig = config.map(({ key, DataComponent }) => (
-        <DataTableColumnData>{DataComponent ? DataComponent(row) : row[key]}</DataTableColumnData>
+      const mappedConfig = config.map(({ key, centralized, DataComponent }) => (
+        <DataTableColumnData centralized={centralized}>
+          {DataComponent ? DataComponent(row) : row[key]}
+        </DataTableColumnData>
       ));
 
       return mappedConfig;

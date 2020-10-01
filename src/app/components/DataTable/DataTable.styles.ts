@@ -8,7 +8,6 @@ export const DataTableElement = styled.table`
   width: 100%;
   border-collapse: collapse;
   border: 1px solid #bdbdbd;
-  text-align: center;
   font-size: ${({ theme }) => theme.typography.size.normal};
   line-height: ${({ theme }) => theme.typography.lineHeight.normal};
   color: ${({ theme }) => theme.colors.accent[800]};
@@ -21,14 +20,14 @@ export const DataTableRowHeader = styled.tr`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
-export const DataTableColumnHeader = styled.th`
+export const DataTableColumnHeader = styled.th<{ centralized: boolean }>`
   min-width: 130px;
   max-width: 600px;
   font-size: ${({ theme }) => theme.typography.size.large};
   line-height: ${({ theme }) => theme.typography.lineHeight.large};
   border: 1px solid #ddd;
   padding: 12px 8px;
-  text-align: center;
+  text-align: ${({ centralized }) => (centralized ? 'center' : 'left')};
 `;
 
 export const DataTableRowData = styled.tr`
@@ -40,9 +39,10 @@ export const DataTableRowData = styled.tr`
   }
 `;
 
-export const DataTableColumnData = styled.td`
+export const DataTableColumnData = styled.td<{ centralized: boolean }>`
   min-width: 130px;
   max-width: 600px;
   border: 1px solid #ddd;
   padding: 8px;
+  text-align: ${({ centralized }) => (centralized ? 'center' : 'left')};
 `;
