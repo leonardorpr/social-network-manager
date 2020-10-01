@@ -50,13 +50,13 @@ const SchedulePost: React.FC = () => {
     media: '',
   });
 
-  const socialNetworksSelected = useMemo(
+  const hasSocialNetworksSelected = useMemo(
     () => schedule.socialNetworks.find((socialNetwork) => socialNetwork.selected),
     [schedule],
   );
   const scheduleButtonIsDisable = useMemo(
-    () => !schedule.publicationTime || !schedule.publicationDate || !socialNetworksSelected,
-    [schedule, socialNetworksSelected],
+    () => !schedule.publicationTime || !schedule.publicationDate || !hasSocialNetworksSelected,
+    [schedule, hasSocialNetworksSelected],
   );
 
   const setScheduleField = useCallback(
