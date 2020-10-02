@@ -1,8 +1,6 @@
 import React, { useCallback } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-// import history from 'configs/history';
-
 import Header from 'app/components/Header';
 import mainRoutesList from 'app/routes/routesList/mainRoutes';
 
