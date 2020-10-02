@@ -143,7 +143,7 @@ const SchedulePost: React.FC = () => {
 
     dispatch(clearDraft());
     history.push('/');
-  }, [history, schedule]);
+  }, [history, dispatch, schedule]);
 
   const handleCloseAttentionModal = useCallback(() => {
     modalAttentionRef.current?.closeModal();
