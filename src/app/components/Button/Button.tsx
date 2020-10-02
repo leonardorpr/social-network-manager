@@ -15,7 +15,7 @@ export interface IButtonProps {
   onClick?(): void;
 }
 
-const Button: React.FC<IButtonProps> = ({ label, element = 'button', type = 'button', to, ...rest }) => {
+const Button: React.FC<IButtonProps> = ({ label, element = 'button', type = 'button', to = '', ...rest }) => {
   if (element === 'button') {
     return (
       <ContainerButton type={type} {...rest}>

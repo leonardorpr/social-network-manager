@@ -28,7 +28,7 @@ const getSocialNetworksFailure: CaseReducer<ISchedulePostStoreState> = (state) =
 
 const saveDraft: CaseReducer<ISchedulePostStoreState, PayloadAction<ISchedulePost>> = (state, action) => ({
   ...state,
-  draft: action.payload,
+  draft: { ...action.payload, publicationDate: null },
 });
 
 const clearPreviouDraft: CaseReducer<ISchedulePostStoreState> = (state) => ({

@@ -10,7 +10,7 @@ import { parseFullTimeDate } from 'utils/dates';
 import useIsMobile from 'core/hooks/useIsMobile';
 import useSelector from 'core/hooks/useSelector';
 import { ISchedulePost } from 'core/interfaces/ISchedulePost';
-import { socialNetworksRequest, setDraft } from 'core/store/slices/schedulePost';
+import { socialNetworksRequest, setDraft, clearDraft } from 'core/store/slices/schedulePost';
 import { setRecentSchedules } from 'core/store/slices/schedules';
 
 import { TextArea, Uploader, SocialNetworksList, PostPreview, ModalFullScreen, Modal } from 'app/components';
@@ -129,6 +129,7 @@ const SchedulePost: React.FC = () => {
     };
 
     dispatch(setRecentSchedules(recentSchedule));
+    dispatch(clearDraft());
     modalSuccessRef.current?.openModal();
   }, [dispatch, modalSuccessRef, schedule]);
 
@@ -140,6 +141,7 @@ const SchedulePost: React.FC = () => {
       return;
     }
 
+    dispatch(clearDraft());
     history.push('/');
   }, [history, schedule]);
 
