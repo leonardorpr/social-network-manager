@@ -3,6 +3,7 @@
 Olá, seja bem vindo(a). Aqui você irá encontrar todas as informações necessárias sobre este projeto 😁
 
 🚀 Para ver o projeto no ar basta [clicar aqui](http://mlabs-social-network-manager.herokuapp.com/)
+👨‍💻 [Clicando aqui](https://github.com/leonardorpr/social-network-manager/blob/master/DEV.md) você encontra mais sobre as decisões técnicas e melhorias que poderiam ser feitas no futuro
 
 ## Pré-requisitos
 
